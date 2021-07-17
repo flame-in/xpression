@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<div id="about-div">
+    <br>
+<figure class="text-center font-italic ">
+    <h1>About xPression</h1>
+    <blockquote class="blockquote">
+        <p class="font-italic">Sentiment Analysis is a rapidly growing domain in Artificial Intelligence and Natural Language Processing 
+            which helps in analysing and classifying emotion from textual data. 
+            This project aims to create a product research application with the aid of sentiment analysis that can predict the 
+            likelihood that a product is bought by a customer i.e., how well perceived and reviewed a product is, 
+            based on social media posts such as Twitter tweets. This will help a user get an impression about the product, 
+            or allow a business to target a particular customer or demographic more efficiently and boost sales for their product. 
+            Twitter is searched for relevant tweets and users related to a product in question. The data will be collected and pre-processed; 
+            genuine information will be kept in a database and the rest will be filtered out using some natural language processing techniques. 
+            Statistical analysis and sentimental scoring are done to this final data using machine learning methods to find the general perception 
+            of a product among customers. The web interface will allow users to view detailed graphs, charts and word clouds generated from the 
+            processed data, along with relevant information pertaining to the product.</p>
+    </blockquote> <br>
+    <figcaption class="blockquote-footer">
+      xPression Project 2021 
+    </figcaption>
+  </figure>
+  <br>
+
+  <figure class="text-center font-italic "> 
+      <a href="https://github.com/xpressionproject/xpression-django">
+        <img src="{% static 'github.svg' %}">GitHub Repo
+    </a> <br>
+    <a href="https://twitter.com/DataXpression"><img src="{% static 'twitter.svg' %}">Twitter</a>
+</figure>
+<br>
+</div>
+
+
+
+{% endblock %}  

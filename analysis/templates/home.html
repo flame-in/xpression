@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+<br>
+{% load crispy_forms_tags %}
+<div id="datastuff" class="container-fluid" style="margin:auto;">
+    <div class="form-inline">
+
+      <form action="/search" method="POST" style="margin:auto;">
+
+        {% csrf_token %}
+
+        {% if user.is_authenticated %}
+        
+        <br>
+        <h3>Data retrieval</h3>
+        <br>
+
+        <div class="container" style="margin:auto;">
+          <div class="row">
+            <div class="col">
+              {{form.keyword|as_crispy_field}}  <p class="text-muted">Enter a keyword to search on Twitter.</span> <br><br>
+              {{form.number_of_tweets|as_crispy_field}} <p class="text-muted">Number of tweets to be queried and added to database.</span>
+            </div>
+          </div>
+          <br>
+        
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+        <br>
+        <br>
+       
+      </form>
+    </div>
+
+</div>
+<div> {{message}}</div>
+<br>
+<br>
+
+    <form>
+        {% else %}
+        <input type="submit" class="btn-submit btn-large" disabled name="" value="Search!"> Log in to analyze
+
+        {% endif %}
+    </form>
+      
+    </div>
+  </div>
+
+  <div class="extend">
+
+  </div>
+
+
+
+{% endblock %}  

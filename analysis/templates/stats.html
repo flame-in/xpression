@@ -1,0 +1,267 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+{% load static %} 
+<div class="card text">
+  <div class="card-header">
+    Details
+  </div>
+  <div class="card-body">
+    <h4 class="card-title">The keyword being analyzed is {{keyword}}</h4> <br>
+    <p class="card-text"><i>Total favorites</i> : {{sumof_favorites}}</p>
+    <p class="card-text"><i>Total retweets</i> : {{sumof_retweets}}</p>
+    <table class="table 1">
+       <tbody>
+        <tr>
+          <th scope="row"></th>
+          <td>Highest follower count of a user and tweet :</td>
+          <td>{{max_followers}}</td>
+          <td>{{max_tweet}}</td>
+        </tr>
+      </tbody>
+  </table>
+    <div>
+  <table class="table table-dark table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Likes</th>
+          <th scope="col">Tweet</th>
+          <th scope="col">Predicted sentiment</th>
+       </tr>
+      </thead>
+       <tbody>
+        {% for data in top_five_l %}
+        <tr>
+        {% for content in data %}
+        <td>>{{content}}</td> 
+        {% endfor %}
+        </tr>  
+        {% endfor %}
+      </tbody>
+  </table>
+</div> 
+    <br>
+ <div>   
+Top five retweeted tweets
+    <table class="table table-dark table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Retweets</th>
+          <th scope="col">Tweet</th>
+          <th scope="col">Predicted sentiment</th>
+       </tr>
+       </thead>
+       <tbody>
+        {% for data in top_five_rt %}
+        <tr>
+        {% for content in data %}
+        <td>>{{content}}</td> 
+        {% endfor %}
+        </tr>  
+        {% endfor %}
+      </tbody>
+  </table>
+</div>
+
+<br>
+<br>
+<br>
+
+  <div class="container-fluid graph">
+      <div class="row ">
+
+        <div class="col" >
+          <canvas id="piechart" style="position: relative; height:30%; width:30%">
+          </canvas>
+        </div>
+
+       <div class="col" >
+        <canvas id="radar-chart" style="position: relative; height:30%; width:30%"></canvas>
+       </div>
+        
+      </div>
+
+      <div class="row">
+
+        <div class="col" >
+          <canvas id="barchart-horizontal"  style="position: relative; height:30%; width:30%"></canvas>
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col" id="container" style="width:80%; height:800px">
+        </div>
+      </div>
+</div>
+
+<p>
+  <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+    Raw data DB
+  </a>
+</p>
+
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+    <p>
+    {% for a in data_db %}
+     Data : {{a}}  <br>
+    {% for attribute in a %}
+      {{attribute}}
+    {% endfor %}
+    <br>
+  {% endfor %}
+    </p>
+  </div>
+</div>
+<!-- ----------------------------------------------------------------------- -->
+
+<script>
+
+  var piechart = new Chart(document.getElementById("piechart"), {
+  type: 'pie',
+  data: {
+    labels:  ["Positive", "Neutral", "Negative"],
+    datasets: [{
+      label: "Tweets",
+      backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f"],
+      data: {{data}}
+    }]
+  },
+  options: {
+    title: {
+      display: true,
+      text: 'Total tweet distribution'
+    }
+  }
+});
+
+
+var radarchart = new Chart(document.getElementById("radar-chart"), {
+  type: 'bar',
+  data: {
+    labels:  {{total}},
+    datasets: [
+       {
+        label: "Positive",
+        // fill: true,
+        backgroundColor: "#3e95cd",
+        // borderColor: "rgba(255,99,132,1)",
+        // pointBorderColor: "#fff",
+        pointBackgroundColor: "#3e95cd",
+        pointBorderColor: "#fff",
+        data: {{poslist}}
+      }
+      ,{
+        label: "Neutral",
+        // fill: true,
+        backgroundColor: "#8e5ea2",
+        // borderColor: "rgba(255,99,132,1)",
+        // pointBorderColor: "#fff",
+        pointBackgroundColor: "#8e5ea2",
+        pointBorderColor: "#fff",
+        data: {{neglist}}
+      },
+      {
+        label: "Negative",
+        //fill: true,
+        backgroundColor: "#3cba9f",
+        //borderColor: "rgba(255,99,132,1)",
+        //pointBorderColor: "#fff",
+        pointBackgroundColor: "#3cba9f",
+        pointBorderColor: "#fff",
+        data: {{neglist}}
+      }
+
+    ]
+  },
+  options: {
+    title: {
+      display: true,
+      text: 'Distribution of tweets'
+    }
+  }
+});
+
+var barhorizontal = new Chart(document.getElementById("barchart-horizontal"), {
+  type: 'bar',
+  data: {
+    labels: ["Positive", "Neutral", "Negative"],
+    datasets: [
+      {
+        label: "Tweets",
+        backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+        data: {{data}}
+      }
+    ]
+  },
+  options: {
+    indexAxis : 'y',
+    legend: { display: false },
+    title: {
+      display: true,
+      text: 'Most recent tweets about keyword'
+    }
+  }
+});
+
+</script>
+
+
+<!-- Word Cloud -->
+
+<script>
+
+  var tweet_text = "{{common}}" ;
+  console.log(tweet_text);
+  
+    anychart.onDocumentReady(function (text) {
+  // set chart theme
+  anychart.theme('lightBlue');
+      $.ajax().done(function (text) {
+        // create tag cloud
+        var chart = anychart.tagCloud();
+        // set data with settings
+        chart.data(tweet_text, {
+          mode: 'by-word',
+          minLength: 4,
+          maxItems: 200
+        });
+        // set chart title
+        chart
+          .title(
+            'Top Words in Twitter'
+          )
+          // set array of angles, by which words will be placed
+          .angles([0])
+          // enabled color range
+          .colorRange(true)
+          // set color scale
+          .colorScale(anychart.scales.ordinalColor())
+          // set settings for normal state
+          .normal({
+            fontFamily: 'Times New Roman'
+          })
+          // set settings for hovered state
+          .hovered({
+            fill: '#df8892'
+          })
+          // set settings for selected state
+          .selected({
+            fill: '#df8892',
+            fontWeight: 'bold'
+          });
+  
+        // set container id for the chart
+        chart.container('container');
+        // initiate chart drawing
+        chart.draw();
+      });
+    });
+  
+  </script>
+ 
+
+{% endblock %} 

@@ -1,0 +1,57 @@
+
+body {
+    margin: 0;
+    width: 100%;
+    height: 100vh;
+    font-family: "Exo", sans-serif;
+    color: #fff;
+    background: linear-gradient(75deg, rgb(10, 43, 51), #353c5c, #2f2e55, rgb(21, 39, 51), #152133 );
+    background-size: 400% 400%;
+    -webkit-animation: gradientBG 50s ease infinite;
+            animation: gradientBG 50s ease infinite;
+   }
+
+   h1 {
+    font-weight: 900;
+   }
+   a {
+    text-decoration: none !important;
+    color: #212121;
+   }
+   @-webkit-keyframes gradientBG {
+    0% {
+    background-position: 0% 50%;
+    }
+    50% {
+    background-position: 100% 50%;
+    }
+    100% {
+    background-position: 0% 50%;
+    }
+   }
+   @keyframes gradientBG {
+    0% {
+    background-position: 0% 50%;
+    }
+    50% {
+    background-position: 100% 50%;
+    }
+    100% {
+    background-position: 0% 50%;
+    }
+   }
+
+   .sidebar {
+        margin:auto;
+       margin-top:20px;
+       border:grey 2px solid;
+       border-radius: 20px;
+   }
+
+   #about-div, #datastuff {
+       background-color: #f7feff;
+       border-radius: 20px;
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(10px);
+    text-d
+   }
