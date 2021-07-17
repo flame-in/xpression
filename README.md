@@ -1,35 +1,40 @@
-# xpression-django
 
-### Django framework for xPression Sentiment Analysis tool
-_______________________________________________
+# xPression - Twitter Data Mining and Sentiment Analysis
 
-* run django server can type the below in cmd
+Final year project at CETKR created using Python and Django.  
+Uses pretrained roBERTa model (torch) to predict sentiment labels from tweet text : positive, negative and neutral.  
+Data mining procedure makes use of Twitter API -> Tweepy.  
+MongoDB + PyMongo to store and retrieve collected tweet data and processed sentiment data.  
 
-(cd-to-location-of-manage.py)>python manage.py runserver
-C:\Users\escla\OneDrive\Desktop\xpression_project\server2.0>python manage.py runserver
+HTML/CSS/JS + Chart.js + AnyChart for UI, graphs and wordcloud.
 
-or
+## Installation
 
-for specific ip that is in ALLOWED_HOST = ['192.168.18.24:80','127.0.0.1:8000'] in setting.py in sentiment folder
-C:\Users\escla\OneDrive\Desktop\xpression_project\server2.0>python manage.py runserver 192.168.18.24:80
+Use the given requirements.txt to install prerequisites. 
 
-________________________________
-
-* .venv -> Virtual Environment
-* .vscode -> VSCode settings
-
-* projectname -> sentiment
-* app name -> analysis
-
-
-Start with 
-```python
-
-python manage.py runserver
-#default port 8000
+```bash
+pip install requirements.txt
 ```
-Admin page at localhost:8000/admin\
-\
-Super user admin account ->\
-username = admin\
-password = admin
+
+## Usage
+1) Download the pytorch_model.bin from Huggingface -> [roBERTa-base model](https://huggingface.co/cardiffnlp/twitter-roberta-base-sentiment)   
+2) Place the file in twitter-roberta-base-sentiment folder
+3) Set path to the roBERTa model in main.py  
+4) Set up and connect to MongoDB local / cloud in dbcode.py  
+
+In root folder :
+```python
+python manage.py runserver
+```
+Django admin can be used to access SQLite user data.
+
+Super user -> Username: admin, Password: admin
+
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
+
+### Credits
+@esclate  
+@dj  
+@indu
