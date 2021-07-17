@@ -35,6 +35,7 @@ Super user -> Username: admin, Password: admin
 [MIT](https://choosealicense.com/licenses/mit/)
 
 ### Credits
-[@esclate](https://github.com/EscLate)     
+[@esclate](https://github.com/EscLate)  
+[@flame-in](https://github.com/flame-in)
 @dj  
 @indu
