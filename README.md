@@ -36,6 +36,6 @@ Super user -> Username: admin, Password: admin
 
 ### Credits
 [@esclate](https://github.com/EscLate)  
-[@flame-in](https://github.com/flame-in)
+[@flame-in](https://github.com/flame-in)  
 @dj  
 @indu
