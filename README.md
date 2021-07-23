@@ -21,6 +21,7 @@ pip install requirements.txt
 2) Place the file in twitter-roberta-base-sentiment folder
 3) Set path to the roBERTa model in main.py  
 4) Set up and connect to MongoDB local / cloud in dbcode.py  
+5) Add Twitter API secret & consumer keys in tweets_one.py
 
 In root folder :
 ```python
