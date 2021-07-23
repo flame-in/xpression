@@ -3,8 +3,8 @@ from analysis.dbcode import insert_data
 
 
 def tweepybot(query, no_of, tpn_type="mixed"):
-    consumer_key = "m8hhqHG7RwmMcA8jmTioHaTOT"
-    consumer_secret = "DT6cTbYX7YudyrCNkItzarwwH0NY3RkwV8Ue6h7dEeLksxaRis"
+    consumer_key = ""
+    consumer_secret = ""
 
     auth = tweepy.AppAuthHandler(consumer_key, consumer_secret)
     api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
